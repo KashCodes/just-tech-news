@@ -4,6 +4,7 @@ const { User } = require('../../models');
 // get all users
 router.get('/', (req, res) => {
   User.findAll({
+    // stops passwords from returning in the query
     attributes: { exclude: ['password'] }
   })
     .then(dbUserData => res.json(dbUserData))
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   User.findOne({
+    // stops passwords from returning in the query
     attributes: { exclude: ['password'] },
     where: {
       id: req.params.id
